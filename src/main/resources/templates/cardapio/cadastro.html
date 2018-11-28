@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+	
+	    <section class="layout-content" layout:fragment="corpo">
+	
+	        <nav class="navbar navbar-expand-md bg-light">
+	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item active">
+	                        <i class="oi oi-caret-right"></i>
+	                        <span>Cadastrar Cardápios</span>
+	                    </li>
+	                </ul>
+	                <a class="btn btn-primary btn-md" th:href="@{/cardapios/listar}" role="button">
+	                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+	                    <span>Listar Cardápios</span>
+	                </a>
+	            </div>
+	        </nav>
+	
+	        <div class="container" id="cadastro">
+	        
+	        	<div th:replace="fragments/alert"></div>
+	        	
+				<form th:action="${cardapio.id == null} ? @{/cardapios/salvar} : @{/cardapios/editar}" 
+				      th:object="${cardapio}" method="POST">
+	        		
+	        		<div th:replace="fragments/validacao :: validacao"></div>
+				    
+				    <div class="form-row">
+				        <div class="form-group col-md-6">
+				            <label for="nome">Nome</label>
+				            <input type="text" class="form-control" id="nome"
+				                   placeholder="Nome do Cardapio" autofocus="autofocus" th:field="*{nomeCardapio}"/>
+				        </div>
+				    </div>
+				    
+				     <div class="form-row">
+				        <div class="form-group col-md-6">
+				            <label for="nome">Descrição</label>
+				            <input type="text" class="form-control" id="descricao"
+				                   placeholder="Descrição do Cardapio" autofocus="autofocus" th:field="*{descricaoCardapio}"/>
+				        </div>
+				        
+				        <div class="form-group col-md-6">
+				            <label for="nome">Preço</label>
+				            <input type="text" class="form-control" id="preco" data-mask="#.##0,00"
+	                               data-mask-reverse="true"
+				                   placeholder="Preço do Cardapio" autofocus="autofocus" th:field="*{precoCardapio}"/>
+				        </div>
+				    </div>
+				    <input type="hidden" id="id" th:field="*{id}"/>
+				    <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+				</form>
+	        </div>
+	    </section>
+</body>
+</html>
